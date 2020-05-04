@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontClientStock';
+  showHideSidebar : boolean = false;
+
+  onAficheChangeBar(showHideSidebar){
+    this.showHideSidebar = showHideSidebar;
+
+  }
+
 }
