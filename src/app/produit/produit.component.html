@@ -1,1 +1,77 @@
-<p>produit works!</p>
+<div class="container">
+    <div class="row">
+
+        <div class="col-7">
+                <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Ref</th>
+                            <th>Quantite</th>
+                            <th>Prix</th>
+                            <th>
+                              <button class="btn btn-outline-primary btn-sm" (click)="operation = 'add'; initProduit();">ADD</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of dataproduit">
+                            <td>{{item.ref}}</td>
+                            <td>{{item.quantite}}</td>
+                            <td>{{item.prix}}</td>
+                            <td>
+                              <button class="btn btn-sm btn-outline-primary" (click)="operation = 'edit'; selectedProduit = item;">Edit</button>
+                              <button class="btn btn-sm btn-outline-danger" (click)="operation = 'remove'; selectedProduit = item;">Remove</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+        </div>
+        <div class="col-5">
+                <div class="card">
+                        <div class="card-header bg-info text-white">
+                                {{operation == 'add' ? 'Ajouter' :
+                                operation == 'edit' ? 'Modifier' :
+                                operation == 'remove' ? 'Supprimer' : ''}}
+                        </div>
+                        <div class="card-body">
+                         <div *ngIf="operation == 'add' || operation == 'edit'">
+                            <form [formGroup]="productForm">
+                                <div class="form-group" >
+                                  <label> Reference:</label>
+                                  <input  type="text" class="form-control" formControlName="ref" [(ngModel)]="selectedProduit.ref">                         
+                                </div>
+                                <div class="alert alert-danger" *ngIf="productForm.controls['ref'].invalid &&
+                                          (productForm.controls['ref'].touched || productForm.controls['ref'].dirty)">
+                                       Référence est obligatoire!
+                                </div>
+                                <div class="form-group" >
+                                        <label> Quantite:</label>
+                                        <input  type="number" class="form-control" formControlName="quantite" [(ngModel)]="selectedProduit.quantite">                         
+                                </div>
+                                <div class="form-group" >
+                                        <label> Prix:</label>
+                                        <input  type="number" class="form-control" formControlName="prix" [(ngModel)]="selectedProduit.prix">                         
+                                </div>
+                                <button class="btn btn-success" [disabled]="productForm.prestine || productForm.invalid" (click)="operation == 'add' ? addProduit() : updateProduit()">
+                                     {{ operation == 'add' ? 'Ajouter' : operation == 'edit' ? 'Modifier' : ''}}</button>
+                            </form>
+                            </div>
+                            <div *ngIf="operation == 'remove'">
+                                    <p class="card-title">
+                                      Référence: {{selectedProduit.ref}}
+                                    </p>
+                                    <p>
+                                      Voulez-vous supprimer cet élément?
+                                    </p>
+                                    <button class="btn btn-success" [disabled]="!selectedProduit.ref" (click)="deleteProduit()">Confirmer</button>
+                             </div>
+                  
+                        </div>
+                        <div class="card-footer">
+                                 @Lvoix in
+                        </div>
+                      </div>
+        </div>
+    </div>
+
+</div>
