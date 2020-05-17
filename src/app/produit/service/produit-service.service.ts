@@ -20,7 +20,7 @@ export class ProduitServiceService {
   updateProduit(pro): Observable<any>{
     return this.http.put(API_URLS.PRODUCT_URL, pro);
   }
-  deleteProduit(ref : string): Observable<any>{
-    return this.http.delete(API_URLS.PRODUCT_URL +'/${ref}');
+  deleteProduit(id : number): Observable<any>{
+    return this.http.delete(API_URLS.PRODUCT_URL +'/'+id);
   }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
    {  path: '',  redirectTo: '/dashboard',  pathMatch: 'full' },
 {  path: 'produit',  component: ProduitComponent ,
         resolve: {
-            products: ProductResolverService
+            produits: ProductResolverService
            }},
 {  path: 'dashboard',  component: DashboardComponent }
 ];

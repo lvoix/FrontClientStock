@@ -22,7 +22,8 @@ export class ProduitComponent implements OnInit {
                         {'ref':"3434", 'quantite': 45, 'prix':130},
                         {'ref':"4535", 'quantite': 433,'prix':100}] */
                         this.initProduit();
-                        this.dataproduit = this.route.snapshot.data.dataproduit;
+                        this.dataproduit = this.route.snapshot.data.produits;
+                        console.log('data produit', +this.dataproduit);
   }
 
   createForm(){
@@ -52,7 +53,7 @@ export class ProduitComponent implements OnInit {
     });
   }
   deleteProduit(){
-    this.produitservice.deleteProduit(this.selectedProduit.ref).subscribe( res => {
+    this.produitservice.deleteProduit(this.selectedProduit.id).subscribe( res => {
       this.selectedProduit = {};
       this.LoadProduits();
     });
